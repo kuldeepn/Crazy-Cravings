@@ -11,11 +11,13 @@ const RestMenu = () => {
 
   if (resItem === null) return <Shimmer />;
 
+  console.log(resItem);
+
   const { name, costForTwoMessage, cuisines } =
-    resItem?.cards[0]?.card?.card?.info;
+    resItem?.cards[2]?.card?.card?.info;
 
   const filteredItems =
-    resItem?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    resItem?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (c) =>
         c?.card?.card?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"

@@ -10,7 +10,7 @@ const MenuItems = ({ menuData }) => {
 
   console.log(menuData);
   return (
-    <div>
+    <div data-testid="food-items">
       <div className="flex p-2 justify-between">
         <div>
           <span className=" font-sans font-medium">{menuData.name}</span>

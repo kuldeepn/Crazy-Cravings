@@ -6,6 +6,14 @@ const RestoCard = (props) => {
 
   const { name, cuisines, avgRating, sla, cloudinaryImageId, feeDetails } =
     resInfo?.info;
+
+  const maxCuisinesDisplay = 3;
+
+  const hasOverflow = cuisines.length > maxCuisinesDisplay;
+  displayedCuisines = hasOverflow
+    ? cuisines.slice(0, maxCuisinesDisplay)
+    : cuisines;
+
   {
     /*
      * *This is Optional chaining means if suppose object not having particular value then it will not give an error
@@ -13,7 +21,10 @@ const RestoCard = (props) => {
   }
 
   return (
-    <div className="m-4 p-4 w-[220px] h-[320px] bg-slate-200 rounded-xl shadow-2xl">
+    <div
+      data-testid="cards-item"
+      className="m-4 p-4 w-[220px] h-[320px] bg-slate-200 rounded-xl shadow-2xl"
+    >
       <img
         className="p-[5px] w-[250px] h-[150px] rounded-xl"
         src={CDN_URL + cloudinaryImageId}
@@ -26,7 +37,10 @@ const RestoCard = (props) => {
           {avgRating} . {sla.deliveryTime} Mins
         </div>
       </h5>
-      <h3 className="font-roboto">{cuisines.join(", ")}</h3>
+      <h3 className="font-roboto">
+        {displayedCuisines.join(", ")}
+        {hasOverflow && "..."}
+      </h3>
     </div>
   );
 };
@@ -36,8 +50,8 @@ export const withPromotedLable = (RestoCard) => {
   return (props) => {
     return (
       <div>
-        <label className="absolute bg-black text-white m-1 px-2 rounded-lg font-thin">
-          Open
+        <label className="absolute bg-[#1BA672] text-white m-1 px-2 rounded-lg font-thin">
+          Pure Veg
         </label>
         <RestoCard {...props} />
       </div>

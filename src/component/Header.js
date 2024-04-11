@@ -14,8 +14,6 @@ const Header = () => {
 
   const cartItem = useSelector((store) => store.cart.item);
 
-  console.log(cartItem);
-
   return (
     <div className="flex justify-between shadow-lg ">
       <Link to={"/"}>
@@ -68,7 +66,7 @@ const Header = () => {
             <Link to={"/login"}>
               <button
                 onClick={() => {
-                  newName = "Logout";
+                  const newName = "Logout";
                   btnName === "Login"
                     ? setbtnName(newName)
                     : setbtnName("Login");

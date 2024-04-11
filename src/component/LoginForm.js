@@ -39,9 +39,13 @@ const LoginForm = () => {
               placeholder="Enter your password..."
             />
           </div>
-          <div className="bg-orange-500 text-white w-full text-center rounded-md py-2 font-mono">
-            <button type="submit">LOGIN</button>
-          </div>
+
+          <button
+            type="submit"
+            className="bg-orange-500 text-white w-full text-center rounded-md py-2 font-mono"
+          >
+            LOGIN
+          </button>
         </div>
       </Form>
     </Formik>

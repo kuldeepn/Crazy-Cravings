@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const CartIcon = () => {
-  cartLength = useSelector((store) => store.cart.item);
+  const cartLength = useSelector((store) => store.cart.item);
 
   return (
     <svg
