@@ -1,6 +1,6 @@
 # Crazy Cravings
 
-## 🚀 Introducing Crazy Cravings – the Swiggy clone🍔📲 With seamless data fetching via live production APIs through CORS
+## 🚀 Introducing Crazy Cravings – The Swiggy clone🍔📲 with seamless data fetching via live production APIs through CORS
 
 ### In this project I have used
 
