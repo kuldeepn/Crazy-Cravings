@@ -4,8 +4,15 @@ import Star from "../utils/icons/Star";
 const RestoCard = (props) => {
   const { resInfo } = props;
 
-  const { name, cuisines, avgRating, sla, cloudinaryImageId, feeDetails } =
-    resInfo?.info;
+  const {
+    name,
+    cuisines,
+    avgRating,
+    sla,
+    cloudinaryImageId,
+    aggregatedDiscountInfoV3,
+    areaName,
+  } = resInfo?.info;
 
   const maxCuisinesDisplay = 3;
 
@@ -23,24 +30,34 @@ const RestoCard = (props) => {
   return (
     <div
       data-testid="cards-item"
-      className="m-4 p-4 w-[220px] h-[320px] bg-slate-200 rounded-xl shadow-2xl"
+      className="relative m-4 w-[220px] h-[320px] rounded-xl shadow-2xl bg-slate-200"
     >
-      <img
-        className="p-[5px] w-[250px] h-[150px] rounded-xl"
-        src={CDN_URL + cloudinaryImageId}
-      />
-      <h2 className="text-lg font-bold py-1 font-roboto">{name}</h2>
-      {/* <h3>Cost {feeDetails.totalFee / 10} ₹</h3> */}
-      <h5 className="flex pb-2">
-        <Star />
-        <div className="px-2 font-roboto font-bold">
-          {avgRating} . {sla.deliveryTime} Mins
+      <div className="relative w-full h-[150px] rounded-xl overflow-hidden">
+        <img
+          className="absolute top-0 left-0 w-full h-full object-cover "
+          src={CDN_URL + cloudinaryImageId}
+          alt={name}
+        />
+        {/* Blackish gradient at the bottom of the image */}
+        <div className="absolute bottom-0 left-0 w-full h-[81px] bg-gradient-to-t from-black pb-8"></div>
+        <div className="text-white absolute bottom-0 left-0 w-full text-center font-extrabold text-lg">
+          {aggregatedDiscountInfoV3?.header}{" "}
+          {aggregatedDiscountInfoV3?.subHeader}
         </div>
-      </h5>
-      <h3 className="font-roboto">
-        {displayedCuisines.join(", ")}
-        {hasOverflow && "..."}
-      </h3>
+      </div>
+      <div className="p-4">
+        <h2 className="text-lg font-bold py-1 font-roboto">{name}</h2>
+        <h5 className="flex pb-2">
+          <Star />
+          <div className="px-2 font-roboto font-bold">
+            {avgRating} . {sla.deliveryTime} Mins
+          </div>
+        </h5>
+        <h3 className="font-roboto">
+          {displayedCuisines.join(", ")}
+          {hasOverflow && "..."}
+        </h3>
+      </div>
     </div>
   );
 };
@@ -50,7 +67,7 @@ export const withPromotedLable = (RestoCard) => {
   return (props) => {
     return (
       <div>
-        <label className="absolute bg-[#1BA672] text-white m-1 px-2 rounded-lg font-thin">
+        <label className="absolute bg-[#1BA672] text-white m-1 px-2 rounded-lg font-thin z-[1]">
           Pure Veg
         </label>
         <RestoCard {...props} />

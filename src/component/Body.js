@@ -4,11 +4,12 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useRestaurant from "../utils/useRestaurant";
+import CategoryCarousel from "./CategoryCarousel";
 
 const Body = () => {
   const [searchTxt, setSearchTxt] = useState("");
   const [filter, setFilter] = useState([]); // *uses for data cleaning the data receiving from useRestaurant
-  const { topRes, searchRes } = useRestaurant();
+  const { topRes, searchRes, title } = useRestaurant();
   const online = useOnlineStatus();
 
   const PromotedLableComponent = withPromotedLable(RestoCard);
@@ -17,8 +18,6 @@ const Body = () => {
     let latestTopRes = searchRes.filter((res) => res.info.avgRating > 4);
     setFilter(latestTopRes);
   };
-
-  console.log(searchRes);
 
   const filterData = (searchTxt, restaurants) => {
     const filteredNewData = restaurants.filter((res) =>
@@ -42,12 +41,14 @@ const Body = () => {
   if (!online) {
     return <h1>You are Offline please check your internet</h1>;
   }
+  console.log(searchRes);
 
   // *Conditonal rendering
   return topRes.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="p-4 m-4">
+      <CategoryCarousel />
       {/* This is JSX comment */}
       <div className="p-4 m-4 text-center">
         <input
@@ -76,7 +77,8 @@ const Body = () => {
           Filter Top Restaurants
         </button>
       </div>
-      <div className="flex flex-wrap">
+      <h1 className="text-black font-bold text-2xl m-4 px-4">{title?.title}</h1>
+      <div className="flex flex-wrap px-3">
         {(filter.length === 0 ? searchRes : filter).map((rest) => {
           return (
             <Link
