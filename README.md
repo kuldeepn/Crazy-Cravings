@@ -6,6 +6,7 @@
 
 - ReactJS as a UI library.
 - Redux toolkit for state management.
+- GitHub API for user data fetching.
 - Context
 - Parcel as a bundler.
 - Babel as a Javascript transpiler.
